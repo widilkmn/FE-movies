@@ -1,31 +1,11 @@
-import { ResponseTvShow, TvShow } from "../../services/tv-show/type";
 import { handlePageBack, handlePageNext } from "../../util/paginationHelper";
-import { useEffect, useState } from "react";
 
 import MovieCard from "../../components/movie-card";
-import { getPopularTvShow } from "../../services/tv-show";
-import { useNavigate } from "react-router-dom";
-import { useQuery } from "../../hooks/useQuery";
+import { TvShow } from "../../services/tv-show/type";
+import usePopularTvShow from "./hooks/usePopularTvShow";
 
 const TvShows = () => {
-  const navigate = useNavigate();
-  const query = useQuery();
-  const page = (query.get("page") !== null ? query.get("page") : 1) as string;
-  const [popularTvShowData, setPopularTvShow] = useState<ResponseTvShow>();
-
-  useEffect(() => {
-    fetchTvShow();
-  }, [page]);
-
-  const fetchTvShow = async () => {
-    try {
-      const response = await getPopularTvShow(page as string);
-
-      setPopularTvShow(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const {page, popularTvShowData, navigate} = usePopularTvShow();
 
   return (
     <div className="flex flex-col p-20">

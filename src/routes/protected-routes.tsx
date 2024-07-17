@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 const ProtectedRoutes = () => {
   const { pathname } = useLocation();
 
-  const token = "";
+  const token = localStorage.getItem("token");
 
   const tokenProtected = ["/", "detail/:id", "/movie", "/tv-show"];
   const publicProtected = ["/login"];

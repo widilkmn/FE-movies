@@ -1,31 +1,11 @@
-import { Movie, ResponseMovie } from "../../services/movie/type";
 import { handlePageBack, handlePageNext } from "../../util/paginationHelper";
-import { useEffect, useState } from "react";
 
+import { Movie } from "../../services/movie/type";
 import MovieCard from "../../components/movie-card";
-import { getNowPlaying } from "../../services/movie";
-import { useNavigate } from "react-router-dom";
-import { useQuery } from "../../hooks/useQuery";
+import useMovieNowPlaying from "./hooks/useNowPlayingMovie";
 
 const Home = () => {
-  const navigate = useNavigate();
-  const query = useQuery();
-  const page = (query.get("page") !== null ? query.get("page") : 1) as string;
-  const [nowPlayingData, setNowPlayingData] = useState<ResponseMovie>();
-
-  useEffect(() => {
-    fetchMovie();
-  }, [page]);
-
-  const fetchMovie = async () => {
-    try {
-      const response = await getNowPlaying(page as string);
-
-      setNowPlayingData(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { page, nowPlayingData, navigate } = useMovieNowPlaying();
 
   return (
     <div className="flex flex-col p-20">
@@ -45,7 +25,7 @@ const Home = () => {
       </div>
       <div className="flex flex-row justify-around">
         <button onClick={() => handlePageBack(page, navigate)}>Back</button>
-        <label >Page {page}</label>
+        <label>Page {page}</label>
         <button onClick={() => handlePageNext(page, navigate)}>Next</button>
       </div>
     </div>

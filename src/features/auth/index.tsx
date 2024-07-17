@@ -1,29 +1,8 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-
-import { postLogin } from "../../services/auth";
-import { useNavigate } from "react-router-dom";
+import { ChangeEvent } from "react";
+import useAuth from "./hooks/useAuth";
 
 const Authentication = () => {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault;
-    console.log(e);
-
-    const payload = {
-      username,
-      password,
-    };
-
-    try {
-      const response = await postLogin(payload);
-      localStorage.setItem("token", response?.token as string);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { handleSubmit, setUsername, setPassword } = useAuth();
 
   return (
     <div className="flex flex-row justify-center h-screen">

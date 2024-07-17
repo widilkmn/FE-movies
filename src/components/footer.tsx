@@ -1,7 +1,6 @@
 import Facebook from "../assets/icons/facebook.png";
 import Instagram from "../assets/icons/instagram.png";
 import Linkedin from "../assets/icons/linkedin.png";
-import React from "react";
 import Twitter from "../assets/icons/twitter.png";
 
 const Footer = () => {

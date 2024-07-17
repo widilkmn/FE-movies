@@ -1,5 +1,5 @@
 import Authentication from "../features/auth/index.tsx";
-import Detail from "../features/detail/detail.tsx";
+import Detail from "../features/detail/index.tsx";
 import Home from "../features/home/index.tsx";
 import Layout from "../components/layout.tsx";
 import Movies from "../features/movie/index.tsx";
@@ -20,15 +20,15 @@ export const router = createBrowserRouter([
             element: <Home />,
           },
           {
-            path: "detail/:type/:id",
+            path: "/detail/:type/:id",
             element: <Detail />,
           },
           {
-            path: "movie",
+            path: "/movie",
             element: <Movies />,
           },
           {
-            path: "tv-show",
+            path: "/tv-show",
             element: <TvShows />,
           },
           {
